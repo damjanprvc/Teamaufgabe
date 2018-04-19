@@ -9,6 +9,7 @@ public class Main {
         System.out.println("--- EP2 Teamarbeit V0.1 ---");
 
         ArrayList<Station> stations = readFile();
+        // Eine änderung
     }
 
     private static ArrayList<Station> readFile(){
