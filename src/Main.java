@@ -8,11 +8,11 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V0.1 ---");
 
-        ArrayList<Station> stations = readFile();
-        // Eine änderung
+        ArrayList<Station> stations = getStationsFromFile();
+
     }
 
-    private static ArrayList<Station> readFile(){
+    private static ArrayList<Station> getStationsFromFile(){
 
         ArrayList<Station> stations = new ArrayList<>();
 
