@@ -10,6 +10,9 @@ public class Main {
 
         ArrayList<Station> stations = getStationsFromFile();
 
+        for(Station s : stations){
+            System.out.println(s.toString());
+        }
     }
 
     private static ArrayList<Station> getStationsFromFile(){
@@ -42,14 +45,6 @@ public class Main {
         }
 
         return stations;
-
-
-//        for(Station s : stations){
-//            System.out.println(s.toString());
-//        }
-
-
     }
-
 
 }
