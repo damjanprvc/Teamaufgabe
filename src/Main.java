@@ -15,6 +15,7 @@ public class Main {
         }
     }
 
+    //TEST KOMMENTAR FÜR GIT WIEDER LÖSCHEN
     private static ArrayList<Station> getStationsFromFile(){
 
         ArrayList<Station> stations = new ArrayList<>();
