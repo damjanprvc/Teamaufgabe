@@ -11,35 +11,37 @@ public class Main {
 
         ArrayList<Station> stations = getStationsFromFile();
 
-        stations.sort(Comparator.comparingDouble(Station::getDistance)); //SORT LIST
+        //stations.sort(Comparator.comparingDouble(Station::getDistance)); //SORT LIST
 
         /*
         for(Station s : stations){
             System.out.println(s.getDistanceFromZero() + "   " + s.toString());
         }*/
 
-        ArrayList<Station> stationsFromCoord = getStationsFromCoord(stations, 4240.270712914558,4492.579044115013, 200.0);
+        ArrayList<Station> stationsFromCoord = getStationsFromCoord(stations, 4240.270712914558,4492.579044115013, 100.0);
+        int counter = 0;
+        //Ausgabe von den gefilterten Stationen
         for(Station s:stationsFromCoord){
-            System.out.println(s.getDistance() + "   " + s.toString());
+            System.out.println(s.toString());
+            counter++;
         }
+        System.out.println("Counter: " + counter);
+
 
 
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
-        double distance = Math.sqrt(Math.pow(x,2) + Math.pow(y,2));//Distance den gesuchten Koordinaten
-        double low = distance - radius; // Untergrenze
-        double high = distance + radius; //Obergrenze
-        ArrayList<Station> tempList = new ArrayList<>();
+        ArrayList tempList = new ArrayList();
 
-        for(Station s : stations){
-
-            if(s.getDistance() >= low && s.getDistance() <= high){ //Verlgeich ob die distnz in der Grenze liegt
+        for(Station s: stations){
+            if(s.getDistance(x,y) <= radius){ //verlgeicht ob distance vom Startpunkt zur nächsten Station im Radius liegt
                 tempList.add(s);
             }
         }
 
-        return  tempList; //Return wert eine arrayliste mit den Stationen die das Kriterium erfüllen
+        return tempList;
+
 
     }
 
@@ -68,7 +70,7 @@ public class Main {
             }
             temp.close();
             s.close();
-            System.out.println("Counter: " + counter);
+
         }catch (FileNotFoundException e){
             System.exit(1);
         }
