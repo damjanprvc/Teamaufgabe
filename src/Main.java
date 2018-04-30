@@ -12,7 +12,6 @@ public class Main {
         ArrayList<Station> stations = getStationsFromFile();
 
         //stations.sort(Comparator.comparingDouble(Station::getDistance)); //SORT LIST
-
         /*
         for(Station s : stations){
             System.out.println(s.getDistanceFromZero() + "   " + s.toString());
@@ -26,8 +25,6 @@ public class Main {
             counter++;
         }
         System.out.println("Counter: " + counter);
-
-
 
     }
 
@@ -44,7 +41,6 @@ public class Main {
 
 
     }
-
 
     private static ArrayList<Station> getStationsFromFile(){
 
