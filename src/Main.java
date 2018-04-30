@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("--- EP2 Teamarbeit V0.1 ---");
+        System.out.println("--- EP2 Teamarbeit V1.0 ---");
 
         ArrayList<Station> stations = getStationsFromFile();
 
@@ -25,7 +25,6 @@ public class Main {
             counter++;
         }
         System.out.println("Counter: " + counter);
-
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
@@ -38,8 +37,6 @@ public class Main {
         }
 
         return tempList;
-
-
     }
 
     private static ArrayList<Station> getStationsFromFile(){

@@ -4,12 +4,10 @@ public class Station {
     private String type;
     private double distanceToStart;
 
-
     public Station(double x, double y, String type) {
         this.x = x;
         this.y = y;
         this.type = type;
-
     }
 
     public double getX() {
