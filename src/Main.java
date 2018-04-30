@@ -17,14 +17,56 @@ public class Main {
             System.out.println(s.getDistanceFromZero() + "   " + s.toString());
         }*/
 
-        ArrayList<Station> stationsFromCoord = getStationsFromCoord(stations, 4240.270712914558,4492.579044115013, 100.0);
+        double x = 4240.270712914558;
+        double y = 4492.579044115013;
+        double radius = 100.0;
         int counter = 0;
+        int airportsCounter = 0;
+        int trainstationCounter = 0;
+
+        ArrayList<Station> stationsFromCoord = getStationsFromCoord(stations, x,y, radius);
+
         //Ausgabe von den gefilterten Stationen
+        System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
         for(Station s:stationsFromCoord){
+            if(s.getType().equals("AIRPORT"))
+            {
+                airportsCounter++;
+            }else{
+                trainstationCounter++;
+            }
             System.out.println(s.toString());
             counter++;
         }
+        System.out.println();
+        System.out.println("  > Airports: " + airportsCounter + "  Trainstations: " + trainstationCounter);
         System.out.println("Counter: " + counter);
+        System.out.println("-------------------------------------------------------");
+
+
+        //ALLES NOCH GESCHEID IN EINE METHODE REINHAUEN UND BERECHNUNG VERBESSERN UND EFFIZIENTER GESTALTEN z.B. Schleifen minimieren
+        int trainstationsFromAirport = 20;  //USER EINGABE
+        double radiusFromAirport = 5.0; //USEREINGABE
+        airportsCounter = 0; //zählt die Flughäfen die die Bedingung erfüllen
+        trainstationCounter = 0; //zählt die Trainstations im radius
+        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " away");
+
+        for(Station s : stations){ //Durch Stationsliste durchlaufen
+            if(s.getType().equals("AIRPORT")){ //Nach Airports checken
+                for(Station s1 : getStationsFromCoord(stations,s.getX(),s.getY(),radiusFromAirport)){ //Für jeden Airport alle Stationen im Radius abspeichern und durch iterieren
+                    if(s1.getType().equals("TRAINSTATION")){ // falls Station eine Trainstation, dann Trainstation counter eröhen
+                        trainstationCounter++;
+
+                        if(trainstationCounter >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhöhen
+                            airportsCounter++;
+                        }
+                    }
+
+                }
+                trainstationCounter = 0; //trainstationcounter wieder null setzen für den nöchsten airport
+            }
+        }
+        System.out.println("  > " + airportsCounter);
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
