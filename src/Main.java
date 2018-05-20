@@ -43,10 +43,10 @@ public class Main {
         System.out.println("Counter: " + counter);
         System.out.println("-------------------------------------------------------");
 
-
+        /*
         //ALLES NOCH GESCHEID IN EINE METHODE REINHAUEN UND BERECHNUNG VERBESSERN UND EFFIZIENTER GESTALTEN z.B. Schleifen minimieren
         int trainstationsFromAirport = 20;  //USER EINGABE
-        double radiusFromAirport = 5.0; //USEREINGABE
+        double radiusFromAirport = 15.0; //USEREINGABE
         airportsCounter = 0; //zählt die Flughäfen die die Bedingung erfüllen
         trainstationCounter = 0; //zählt die Trainstations im radius
         System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " away");
@@ -67,6 +67,33 @@ public class Main {
             }
         }
         System.out.println("  > " + airportsCounter);
+        */
+
+        // ---------------
+        // 2D-GRID
+        // ---------------
+        // Berechnung der GRID Größe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
+        double maxx = 0.0;
+        double maxy = 0.0;
+        int c = 0;
+        for(Station s: stations){
+            if(s.getX() > maxx) maxx = s.getX();
+            if(s.getY() > maxy) maxy = s.getY();
+            c++;
+        }
+        System.out.println("MAX X: "+ maxx);
+        System.out.println("MAX Y: "+ maxy);
+        System.out.println("Anz Stationen: "+ c);
+
+        // Initialise GRID
+        // Jedes Grid Element Enthält eine Liste mit den darin enthaltenen Stationen
+        ArrayList[][] grid = new ArrayList[300][300];
+        for(int i = 0; i < 300; i++)
+            for(int j = 0; j < 300; j++)
+                grid[i][j] = new ArrayList<Station>();
+
+        // Insert Points in Grid
+
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
