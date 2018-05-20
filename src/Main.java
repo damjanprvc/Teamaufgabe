@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
+    static ArrayList[][] grid;
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V1.0 ---");
 
@@ -87,13 +88,19 @@ public class Main {
 
         // Initialise GRID
         // Jedes Grid Element Enthält eine Liste mit den darin enthaltenen Stationen
-        ArrayList[][] grid = new ArrayList[300][300];
+        grid = new ArrayList[300][300];
         for(int i = 0; i < 300; i++)
             for(int j = 0; j < 300; j++)
                 grid[i][j] = new ArrayList<Station>();
 
         // Insert Points in Grid
+        addPointInGrid(stations); // Funktioniert nicht. Negativwerte berücksichtigen!
+    }
 
+    private static void addPointInGrid(ArrayList<Station> stations){
+        for(Station s : stations){
+            grid[(int)s.getX()/67][(int)s.getY()/42].add(s);
+        }
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
