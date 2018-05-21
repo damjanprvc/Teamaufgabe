@@ -18,8 +18,8 @@ public class Main {
             System.out.println(s.getDistanceFromZero() + "   " + s.toString());
         }*/
 
-        double x = 4240.270712914558;
-        double y = 4492.579044115013;
+        double x = 1818.54657;
+        double y = 5813.29982;
         double radius = 100.0;
         int counter = 0;
         int airportsCounter = 0;
@@ -30,13 +30,12 @@ public class Main {
         //Ausgabe von den gefilterten Stationen
         System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
         for(Station s:stationsFromCoord){
-            if(s.getType().equals("AIRPORT"))
-            {
+            if(s.getType().equals("AIRPORT")) {
                 airportsCounter++;
             }else{
                 trainstationCounter++;
             }
-            System.out.println(s.toString());
+            // System.out.println(s.toString());
             counter++;
         }
         System.out.println();
@@ -44,7 +43,7 @@ public class Main {
         System.out.println("Counter: " + counter);
         System.out.println("-------------------------------------------------------");
 
-        /*
+        /* Temporär auskommentiert um Debug Zeit zu sparen
         //ALLES NOCH GESCHEID IN EINE METHODE REINHAUEN UND BERECHNUNG VERBESSERN UND EFFIZIENTER GESTALTEN z.B. Schleifen minimieren
         int trainstationsFromAirport = 20;  //USER EINGABE
         double radiusFromAirport = 15.0; //USEREINGABE
@@ -76,30 +75,40 @@ public class Main {
         // Berechnung der GRID Größe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
         double maxx = 0.0;
         double maxy = 0.0;
+        double minx = 0.0;
+        double miny = 0.0;
         int c = 0;
         for(Station s: stations){
             if(s.getX() > maxx) maxx = s.getX();
             if(s.getY() > maxy) maxy = s.getY();
+            if(s.getX() < minx) minx = s.getX();
+            if(s.getY() < miny) miny = s.getY();
             c++;
         }
         System.out.println("MAX X: "+ maxx);
         System.out.println("MAX Y: "+ maxy);
+        System.out.println("MIN X: "+ minx);
+        System.out.println("MIN Y: "+ miny);
         System.out.println("Anz Stationen: "+ c);
 
         // Initialise GRID
-        // Jedes Grid Element Enthält eine Liste mit den darin enthaltenen Stationen
+        // Jedes Grid Element Enthält eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
+        GridInit();
+        // Insert Points in Grid
+        addPointsInGrid(stations);
+
+        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende Fläche berechenen
+    }
+
+    private static void GridInit(){
         grid = new ArrayList[300][300];
         for(int i = 0; i < 300; i++)
             for(int j = 0; j < 300; j++)
                 grid[i][j] = new ArrayList<Station>();
-
-        // Insert Points in Grid
-        addPointInGrid(stations); // Funktioniert nicht. Negativwerte berücksichtigen!
     }
-
-    private static void addPointInGrid(ArrayList<Station> stations){
+    private static void addPointsInGrid(ArrayList<Station> stations){
         for(Station s : stations){
-            grid[(int)s.getX()/67][(int)s.getY()/42].add(s);
+            grid[Math.abs((int)s.getX()/67)][Math.abs((int)s.getY()/49)].add(s);
         }
     }
 
