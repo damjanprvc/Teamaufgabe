@@ -28,7 +28,7 @@ public class Station {
         double sumX = x - x1;
         double sumY = y - y1;
         double distance = Math.hypot(sumX,sumY);
-        distanceToStart = distance; // distance für die Klassenvariable für den toString abgespeichert
+        distanceToStart = distance; // distance für die Objektnvariable für den toString abgespeichert
         return distance ;
     }
 

@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
-    static ArrayList[][] grid;
+    static ArrayList<Station>[][] grid;
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V1.0 ---");
 
@@ -20,7 +20,7 @@ public class Main {
 
         double x = 1818.54657;
         double y = 5813.29982;
-        double radius = 100.0;
+        double radius = 100.0; //in km? anpassen irgendwie?
         int counter = 0;
         int airportsCounter = 0;
         int trainstationCounter = 0;
@@ -98,6 +98,7 @@ public class Main {
         addPointsInGrid(stations);
 
         // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende Fläche berechenen
+        searchInGrid(x,y,radius);
     }
 
     private static void GridInit(){
@@ -110,6 +111,38 @@ public class Main {
         for(Station s : stations){
             grid[Math.abs((int)s.getX()/67)][Math.abs((int)s.getY()/49)].add(s);
         }
+    }
+
+    //Gibt alle Airports und Trainstations aus
+    private static void searchInGrid(double x, double y, double radius){
+        int xAdapted = (int)x/67; //x Coord angepasst für den Grid
+        int yAdapted = (int)y/49; //y Coord angepasst für den Grid
+        int radiusAdapted = (int) radius; //ToDo: Radius zum Grid anpassen, sowie x und y
+        int trainstationCounter = 0;
+        int airportCounter = 0;
+        int i = Math.abs(xAdapted - radiusAdapted);
+        int j = Math.abs(yAdapted - radiusAdapted);
+
+        for(; i <= xAdapted + radiusAdapted; i++)
+        {
+            for(; j <= yAdapted + radiusAdapted; j++)
+            {
+                for(Station s : grid[i][j]){
+                    if(s.getType().equals("AIRPORT")){
+                        airportCounter++;
+                    }else if(s.getType().equals("TRAINSTATION")){
+                        trainstationCounter++;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Im Radius " + radius + " liegen " + airportCounter + " Flughäfen und " + trainstationCounter + " Bahnhöfe");
+    }
+
+    //Gibt die Anzahl der Flughäfen aus die mind. x Trainstation im radius y haben
+    private static void searchInGrid(int x, int y, int trainstationsFromAirport, int radiusFromAirport){
+        // TODO
     }
 
     private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
