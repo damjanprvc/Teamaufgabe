@@ -43,7 +43,7 @@ public class Main {
         System.out.println("Counter: " + counter);
         System.out.println("-------------------------------------------------------");
 
-        /* Temporär auskommentiert um Debug Zeit zu sparen
+
         //ALLES NOCH GESCHEID IN EINE METHODE REINHAUEN UND BERECHNUNG VERBESSERN UND EFFIZIENTER GESTALTEN z.B. Schleifen minimieren
         int trainstationsFromAirport = 20;  //USER EINGABE
         double radiusFromAirport = 15.0; //USEREINGABE
@@ -67,7 +67,7 @@ public class Main {
             }
         }
         System.out.println("  > " + airportsCounter);
-        */
+
 
         // ---------------
         // 2D-GRID
@@ -94,6 +94,7 @@ public class Main {
         // Initialise GRID
         // Jedes Grid Element Enthält eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
         GridInit();
+
         // Insert Points in Grid
         addPointsInGrid(stations);
 
@@ -109,7 +110,7 @@ public class Main {
     }
     private static void addPointsInGrid(ArrayList<Station> stations){
         for(Station s : stations){
-            grid[Math.abs((int)s.getX()/67)][Math.abs((int)s.getY()/49)].add(s);
+            grid[(int)Math.abs(s.getX())/67][(int)Math.abs(s.getY())/49].add(s);
         }
     }
 
@@ -117,22 +118,30 @@ public class Main {
     private static void searchInGrid(double x, double y, double radius){
         int xAdapted = (int)x/67; //x Coord angepasst für den Grid
         int yAdapted = (int)y/49; //y Coord angepasst für den Grid
-        int radiusAdapted = (int) radius; //ToDo: Radius zum Grid anpassen, sowie x und y
+        int radiusAdapted = (int) radius/67; //ToDo: Radius zum Grid anpassen, sowie x und y
         int trainstationCounter = 0;
         int airportCounter = 0;
-        int i = Math.abs(xAdapted - radiusAdapted);
-        int j = Math.abs(yAdapted - radiusAdapted);
+
+        int i = xAdapted - radiusAdapted;
+        int j = yAdapted - radiusAdapted;
+        if (xAdapted - radiusAdapted < 0)
+            i = 0;
+        if (yAdapted - radiusAdapted < 0)
+            j = 0;
 
         for(; i <= xAdapted + radiusAdapted; i++)
         {
             for(; j <= yAdapted + radiusAdapted; j++)
             {
                 for(Station s : grid[i][j]){
-                    if(s.getType().equals("AIRPORT")){
-                        airportCounter++;
-                    }else if(s.getType().equals("TRAINSTATION")){
-                        trainstationCounter++;
+                    if(s.getDistance(x,y) <= radius) {
+                        if(s.getType().equals("AIRPORT")){
+                            airportCounter++;
+                        }else if(s.getType().equals("TRAINSTATION")){
+                            trainstationCounter++;
+                        }
                     }
+
                 }
             }
         }
