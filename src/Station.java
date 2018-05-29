@@ -1,10 +1,10 @@
 public class Station {
     private double x;
     private double y;
-    private String type;
+    private TypeEnum type;
     private double distanceToStart;
 
-    public Station(double x, double y, String type) {
+    public Station(double x, double y,  TypeEnum type) {
         this.x = x;
         this.y = y;
         this.type = type;
@@ -18,7 +18,7 @@ public class Station {
         return y;
     }
 
-    public String getType() {
+    public TypeEnum getType() {
         return type;
     }
 
@@ -27,7 +27,7 @@ public class Station {
         //Formel = Pythagoras mit (P1.X - P2.X)^2 fpr Y auch
         double sumX = x - x1;
         double sumY = y - y1;
-        double distance = Math.hypot(sumX,sumY);
+        double distance = Math.sqrt(Math.pow(sumX,2) + Math.pow(sumY,2));
         distanceToStart = distance; // distance für die Objektnvariable für den toString abgespeichert
         return distance ;
     }

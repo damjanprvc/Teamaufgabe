@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -10,7 +11,106 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V1.0 ---");
 
-        ArrayList<Station> stations = getStationsFromFile();
+
+
+        //Programinitsialisierung
+        ArrayList<Station> stations = getStationsFromFile(); //Daten vom File einlesen
+        Scanner sc = new Scanner(System.in); // Scanner für den Userinput
+        int userInput;
+        double x = 0, y = 0, radius = 0;
+        int trainstationsFromAirport;  //USER EINGABE
+        double radiusFromAirport; //USEREINGABE
+        //-----------------------------------------
+
+        System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
+        System.out.println("1: Naive Methode");
+        System.out.println("2: Effiziente Methode");
+        System.out.println("0: Quit");
+        System.out.println("-------------------------------------------------------");
+
+        userInput = sc.nextInt(); //Userinput
+
+        //Menü
+        switch (userInput){
+            case 0:
+                System.out.println("QUITTING PROGRAM");
+                System.out.println("------------------------------------");
+                break;
+            case 1:
+                System.out.println("NAIVE METHODE");
+                //ToDO: Naive Methode aufrufen
+                //NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
+                //naiveClass.printOutStations();
+                System.out.println("------------------------------------------------------");
+                System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
+                System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
+                System.out.println("2: Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
+                userInput = sc.nextInt();
+                switch (userInput){
+                    case 0:
+                        System.out.println("QUITTING PROGRAM");
+                        System.out.println("------------------------------------");
+                        break;
+                    case 1:
+                        System.out.println("Gebe alle Stationen vom Punkt(x,y) aus");
+                        System.out.println("------------------------------------------");
+
+                        //ToDo: evtl sicherstellen das richtige Eingabe eingegeben wurde
+                        //User gibt die x und y und radius ein
+                        System.out.println("Geben Sie die jeweiligen Koordinaten ein");
+                        System.out.print("x = ");
+                        x = sc.nextDouble();
+                        System.out.print("y = ");
+                        y = sc.nextDouble();
+                        System.out.print("radius = ");
+                        radius = sc.nextDouble();
+                        System.out.println("-----------------------------------");
+
+
+                        NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
+                        naiveClass.printOutStations();
+
+                        break;
+                    case 2:
+                        System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
+                        System.out.println("-----------------------------------------------");
+                        System.out.println("Geben Sie den jeweiligen Radius vom Flughafen ein");
+                        System.out.print("radiusFromAirport = ");
+                        radiusFromAirport = sc.nextDouble();
+                        System.out.println("Geben Sie die mind. Anzahl der Banhöfe ein");
+                        System.out.print("trainstationsFromAirport = ");
+                        trainstationsFromAirport = sc.nextInt();
+                        System.out.println("-------------------------------------");
+
+                        NaiveClass naiveClass1 = new NaiveClass(stations, trainstationsFromAirport, radiusFromAirport);
+                        naiveClass1.printOutStationsFromAirport();
+                        break;
+                    default:
+                        System.out.println("Invalid selection");
+                }
+                System.out.println("-----------------------------------");
+                break;
+            case 2:
+                System.out.println("EFFIZIENTE METHODE");
+                //ToDo: Effiziente Methode aufrufen und switch statement für methodenauswahl implementieren
+                System.out.println("-------------------------------------");
+                break;
+            default:
+                System.out.println("Invalid selection");
+        }
+
+
+
+
+
+
+        /*
+        double x = 1818.54657;
+        double y = 5813.29982;
+        double radius = 100.0; //in km? anpassen irgendwie?
+        */
+
+
 
         //stations.sort(Comparator.comparingDouble(Station::getDistance)); //SORT LIST
         /*
@@ -18,61 +118,13 @@ public class Main {
             System.out.println(s.getDistanceFromZero() + "   " + s.toString());
         }*/
 
-        double x = 1818.54657;
-        double y = 5813.29982;
-        double radius = 100.0; //in km? anpassen irgendwie?
-        int counter = 0;
-        int airportsCounter = 0;
-        int trainstationCounter = 0;
 
-        ArrayList<Station> stationsFromCoord = getStationsFromCoord(stations, x,y, radius);
-
-        //Ausgabe von den gefilterten Stationen
-        System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
-        for(Station s:stationsFromCoord){
-            if(s.getType().equals("AIRPORT")) {
-                airportsCounter++;
-            }else{
-                trainstationCounter++;
-            }
-            // System.out.println(s.toString());
-            counter++;
-        }
-        System.out.println();
-        System.out.println("  > Airports: " + airportsCounter + "  Trainstations: " + trainstationCounter);
-        System.out.println("Counter: " + counter);
-        System.out.println("-------------------------------------------------------");
-
-
-        //ALLES NOCH GESCHEID IN EINE METHODE REINHAUEN UND BERECHNUNG VERBESSERN UND EFFIZIENTER GESTALTEN z.B. Schleifen minimieren
-        int trainstationsFromAirport = 20;  //USER EINGABE
-        double radiusFromAirport = 15.0; //USEREINGABE
-        airportsCounter = 0; //zählt die Flughäfen die die Bedingung erfüllen
-        trainstationCounter = 0; //zählt die Trainstations im radius
-        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " away");
-
-        for(Station s : stations){ //Durch Stationsliste durchlaufen
-            if(s.getType().equals("AIRPORT")){ //Nach Airports checken
-                for(Station s1 : getStationsFromCoord(stations,s.getX(),s.getY(),radiusFromAirport)){ //Für jeden Airport alle Stationen im Radius abspeichern und durch iterieren
-                    if(s1.getType().equals("TRAINSTATION")){ // falls Station eine Trainstation, dann Trainstation counter eröhen
-                        trainstationCounter++;
-
-                        if(trainstationCounter >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhöhen
-                            airportsCounter++;
-                        }
-                    }
-
-                }
-                trainstationCounter = 0; //trainstationcounter wieder null setzen für den nöchsten airport
-            }
-        }
-        System.out.println("  > " + airportsCounter);
 
 
         // ---------------
         // 2D-GRID
         // ---------------
-        // Berechnung der GRID Größe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
+        // Berechnung der GRID GrÃ¶ÃŸe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
         double maxx = 0.0;
         double maxy = 0.0;
         double minx = 0.0;
@@ -92,13 +144,13 @@ public class Main {
         System.out.println("Anz Stationen: "+ c);
 
         // Initialise GRID
-        // Jedes Grid Element Enthält eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
+        // Jedes Grid Element EnthÃ¤lt eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
         GridInit();
 
         // Insert Points in Grid
         addPointsInGrid(stations);
 
-        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende Fläche berechenen
+        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende FlÃ¤che berechenen
         searchInGrid(x,y,radius);
     }
 
@@ -116,8 +168,8 @@ public class Main {
 
     //Gibt alle Airports und Trainstations aus
     private static void searchInGrid(double x, double y, double radius){
-        int xAdapted = (int)x/67; //x Coord angepasst für den Grid
-        int yAdapted = (int)y/49; //y Coord angepasst für den Grid
+        int xAdapted = (int)x/67; //x Coord angepasst fÃ¼r den Grid
+        int yAdapted = (int)y/49; //y Coord angepasst fÃ¼r den Grid
         int radiusAdapted = (int) radius/67; //ToDo: Radius zum Grid anpassen, sowie x und y
         int trainstationCounter = 0;
         int airportCounter = 0;
@@ -146,29 +198,18 @@ public class Main {
             }
         }
 
-        System.out.println("Im Radius " + radius + " liegen " + airportCounter + " Flughäfen und " + trainstationCounter + " Bahnhöfe");
+        System.out.println("Im Radius " + radius + " liegen " + airportCounter + " FlughÃ¤fen und " + trainstationCounter + " BahnhÃ¶fe");
     }
 
-    //Gibt die Anzahl der Flughäfen aus die mind. x Trainstation im radius y haben
+    //Gibt die Anzahl der FlughÃ¤fen aus die mind. x Trainstation im radius y haben
     private static void searchInGrid(int x, int y, int trainstationsFromAirport, int radiusFromAirport){
         // TODO
-    }
-
-    private static ArrayList<Station> getStationsFromCoord(ArrayList<Station> stations, double x, double y, double radius){
-        ArrayList tempList = new ArrayList();
-
-        for(Station s: stations){
-            if(s.getDistance(x,y) <= radius){ //verlgeicht ob distance vom Startpunkt zur nächsten Station im Radius liegt
-                tempList.add(s);
-            }
-        }
-
-        return tempList;
     }
 
     private static ArrayList<Station> getStationsFromFile(){
 
         ArrayList<Station> stations = new ArrayList<>();
+
 
         try (Scanner s = new Scanner(
                 new File(System.getProperty("user.dir") +
@@ -183,7 +224,7 @@ public class Main {
                     line = s.nextLine();
                     temp = new Scanner(line).useDelimiter(";");
                     temp.next();
-                    stations.add(new Station(Double.parseDouble(temp.next()), Double.parseDouble(temp.next()), temp.next()));
+                    stations.add(new Station(Double.parseDouble(temp.next()), Double.parseDouble(temp.next()), TypeEnum.valueOf(temp.next())));
                     counter++;
                 }
 
