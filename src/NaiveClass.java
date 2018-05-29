@@ -11,6 +11,7 @@ public class NaiveClass {
     private double radiusFromAirport;
 
 
+
     //Konstruktor für die 1. Teilaufgabe
     public NaiveClass(ArrayList<Station> stations, double x, double y, double radius){
         this.stations = stations;
@@ -51,6 +52,7 @@ public class NaiveClass {
     }
 
     public void printOutStationsFromAirport(){
+
 
         counterArray = new int[3];
 

@@ -5,6 +5,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     static ArrayList<Station>[][] grid;
@@ -20,6 +21,7 @@ public class Main {
         double x = 0, y = 0, radius = 0;
         int trainstationsFromAirport;  //USER EINGABE
         double radiusFromAirport; //USEREINGABE
+        long startTime, stopTime, elapsedTime;
         //-----------------------------------------
 
         System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
@@ -68,7 +70,13 @@ public class Main {
 
 
                         NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
+                        startTime = System.nanoTime();
                         naiveClass.printOutStations();
+                        stopTime = System.nanoTime();
+                        elapsedTime = stopTime - startTime;
+                        elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+
+                        System.out.println("LAUFZEIT: " + elapsedTime + " ns");
 
                         break;
                     case 2:
@@ -83,7 +91,13 @@ public class Main {
                         System.out.println("-------------------------------------");
 
                         NaiveClass naiveClass1 = new NaiveClass(stations, trainstationsFromAirport, radiusFromAirport);
+                        startTime = System.nanoTime();
                         naiveClass1.printOutStationsFromAirport();
+                        stopTime = System.nanoTime();
+                        elapsedTime = stopTime - startTime;
+                        elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                        System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
+
                         break;
                     default:
                         System.out.println("Invalid selection");
