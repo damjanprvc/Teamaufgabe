@@ -24,10 +24,6 @@ public class Main {
 
         //Programinitsialisierung
         ArrayList<Station> stations = getStationsFromFile(); //Daten vom File einlesen
-        int counter = 0;
-        for (Station s : stations)
-            counter++;
-        System.out.println("COUNTER RICHTIG: " + counter);
         Scanner sc = new Scanner(System.in); // Scanner für den Userinput
         int userInput;
         double x = 0, y = 0, radius = 0;
@@ -79,7 +75,7 @@ public class Main {
                         radius = sc.nextDouble();*/
                         System.out.println("-----------------------------------");
 
-                        x = 1818.54657; y = 5813.29982; radius = 100.0;
+                        x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                         NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
                         startTime = System.nanoTime();
                         naiveClass.printOutStations();
@@ -120,8 +116,13 @@ public class Main {
                 //ToDo: Effiziente Methode aufrufen und switch statement für methodenauswahl implementieren
                 Grid grid1 = new Grid();
                 grid1.addPointsInGrid(stations);
-                x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
+                // x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
+                x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                 grid1.printStations(x, y, radius);
+
+                trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
+                radiusFromAirport = 15; //USEREINGABE
+                grid1.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
                 System.out.println("-------------------------------------");
                 break;
             default:
