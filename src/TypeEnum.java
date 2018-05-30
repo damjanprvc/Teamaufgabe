@@ -6,7 +6,7 @@ public enum TypeEnum {
     TypeEnum(int i){
         index = i;
     }
-
+    
     int showIndex(){
         return index;
     }

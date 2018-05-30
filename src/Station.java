@@ -22,7 +22,12 @@ public class Station {
         return type;
     }
 
-    //Gibt die Distanz zum Startpunkt zurück
+    /**
+     * Gibt die Distanz zum Startpunkt zurück
+     * @param x1
+     * @param y1
+     * @return
+     */
     public double getDistance(double x1, double y1){
         //Formel = Pythagoras mit (P1.X - P2.X)^2 fpr Y auch
         double sumX = x - x1;

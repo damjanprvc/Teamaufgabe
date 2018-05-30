@@ -8,11 +8,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    static ArrayList<Station>[][] grid;
+    // static ArrayList<Station>[][] grid;
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V1.0 ---");
-
-
 
         //Programinitsialisierung
         ArrayList<Station> stations = getStationsFromFile(); //Daten vom File einlesen
@@ -29,6 +27,7 @@ public class Main {
         System.out.println("2: Effiziente Methode");
         System.out.println("0: Quit");
         System.out.println("-------------------------------------------------------");
+        System.out.print("> ");
 
         userInput = sc.nextInt(); //Userinput
 
@@ -47,6 +46,7 @@ public class Main {
                 System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
                 System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
                 System.out.println("2: Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
+                System.out.print("> ");
                 userInput = sc.nextInt();
                 switch (userInput){
                     case 0:
@@ -107,15 +107,15 @@ public class Main {
             case 2:
                 System.out.println("EFFIZIENTE METHODE");
                 //ToDo: Effiziente Methode aufrufen und switch statement für methodenauswahl implementieren
+                Grid grid1 = new Grid();
+                grid1.addPointsInGrid(stations);
+                x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
+                grid1.printStations(x, y, radius);
                 System.out.println("-------------------------------------");
                 break;
             default:
                 System.out.println("Invalid selection");
         }
-
-
-
-
 
 
         /*
@@ -139,6 +139,9 @@ public class Main {
         // 2D-GRID
         // ---------------
         // Berechnung der GRID GrÃ¶ÃŸe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
+
+        // Noch nicht löschen!!!
+        /*
         double maxx = 0.0;
         double maxy = 0.0;
         double minx = 0.0;
@@ -156,19 +159,20 @@ public class Main {
         System.out.println("MIN X: "+ minx);
         System.out.println("MIN Y: "+ miny);
         System.out.println("Anz Stationen: "+ c);
+        */
 
         // Initialise GRID
         // Jedes Grid Element EnthÃ¤lt eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
-        GridInit();
+        // GridInit();
 
         // Insert Points in Grid
-        addPointsInGrid(stations);
+        // addPointsInGrid(stations);
 
-        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende FlÃ¤che berechenen
-        searchInGrid(x,y,radius);
+        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende Fläche berechenen
+        // searchInGrid(x,y,radius);
     }
 
-    private static void GridInit(){
+/*    private static void GridInit(){
         grid = new ArrayList[300][300];
         for(int i = 0; i < 300; i++)
             for(int j = 0; j < 300; j++)
@@ -213,7 +217,7 @@ public class Main {
         }
 
         System.out.println("Im Radius " + radius + " liegen " + airportCounter + " FlughÃ¤fen und " + trainstationCounter + " BahnhÃ¶fe");
-    }
+    }*/
 
     //Gibt die Anzahl der FlughÃ¤fen aus die mind. x Trainstation im radius y haben
     private static void searchInGrid(int x, int y, int trainstationsFromAirport, int radiusFromAirport){
