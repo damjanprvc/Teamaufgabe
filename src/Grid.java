@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Grid {
     static ArrayList<Station>[][] grid;
@@ -27,6 +30,16 @@ public class Grid {
         for(Station s : stations){
             grid[(int)Math.abs(s.getX())/67][(int)Math.abs(s.getY())/49].add(s);
         }
+        int counter = 0;
+        for(int i = 0; i < 300; i++)
+            for(int j = 0; j < 300; j++)
+                for (Station temp : grid[i][j]) {
+                    // System.out.println(temp);
+                    System.out.println(temp.toString());
+                    counter++;
+                }
+                //grid[i][j] = new ArrayList<Station>();
+        System.out.println("COUUUUNNTNTER GRID: " + counter);
     }
 
     /**
@@ -41,12 +54,14 @@ public class Grid {
         int yAdapted = (int)y/49; //y Coord angepasst fÃ¼r den Grid
         int radiusAdapted = (int) radius/67; //ToDo: Radius zum Grid anpassen, sowie x und y
 
-        int i = xAdapted - radiusAdapted;
-        int j = yAdapted - radiusAdapted;
+        int i = Math.abs(xAdapted - radiusAdapted);
+        int j = Math.abs(yAdapted - radiusAdapted);
+        /*
         if (xAdapted - radiusAdapted < 0)
             i = 0;
         if (yAdapted - radiusAdapted < 0)
             j = 0;
+            */
 
         for(; i <= xAdapted + radiusAdapted; i++)
         {
@@ -56,9 +71,11 @@ public class Grid {
                     if(s.getDistance(x,y) <= radius) {
                         if(s.getType() == TypeEnum.AIRPORT){
                             counterArray[1]++;
+
                         }else if(s.getType() == TypeEnum.TRAINSTATION){
                             counterArray[2]++;
                         }
+                        // System.out.println(s.toString());
                     }
 
                 }

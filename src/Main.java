@@ -7,6 +7,16 @@ import java.util.Comparator;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Dieses Programm liest alle Stations (Trainstations & Airports) aus der Datei "junctions.csv"
+ * und verarbeitet sie entsprechend weiter.
+ * Dabei stehen 2 Varianten zur verfügung:
+ * - Naive Methode: Stations werden in einer Liste gespeichert und beim suchen nacheinander durchiteriert
+ * - Effiziente Mehode (GRID): Stations werden in einem Grid gespeichert und beim suchen werden NUR die jeweiligen Grid-Elemente durchsucht
+ *
+ * @author Damjan Prvulovic
+ * @author Abhishek Singh
+ */
 public class Main {
     // static ArrayList<Station>[][] grid;
     public static void main(String[] args) {
@@ -14,6 +24,10 @@ public class Main {
 
         //Programinitsialisierung
         ArrayList<Station> stations = getStationsFromFile(); //Daten vom File einlesen
+        int counter = 0;
+        for (Station s : stations)
+            counter++;
+        System.out.println("COUNTER RICHTIG: " + counter);
         Scanner sc = new Scanner(System.in); // Scanner für den Userinput
         int userInput;
         double x = 0, y = 0, radius = 0;
@@ -39,9 +53,6 @@ public class Main {
                 break;
             case 1:
                 System.out.println("NAIVE METHODE");
-                //ToDO: Naive Methode aufrufen
-                //NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
-                //naiveClass.printOutStations();
                 System.out.println("------------------------------------------------------");
                 System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
                 System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
@@ -60,15 +71,15 @@ public class Main {
                         //ToDo: evtl sicherstellen das richtige Eingabe eingegeben wurde
                         //User gibt die x und y und radius ein
                         System.out.println("Geben Sie die jeweiligen Koordinaten ein");
-                        System.out.print("x = ");
+                        /*System.out.print("x = ");
                         x = sc.nextDouble();
                         System.out.print("y = ");
                         y = sc.nextDouble();
                         System.out.print("radius = ");
-                        radius = sc.nextDouble();
+                        radius = sc.nextDouble();*/
                         System.out.println("-----------------------------------");
 
-
+                        x = 1818.54657; y = 5813.29982; radius = 100.0;
                         NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
                         startTime = System.nanoTime();
                         naiveClass.printOutStations();

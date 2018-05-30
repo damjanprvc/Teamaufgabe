@@ -1,3 +1,6 @@
+/**
+ * Die Klasse Station bildet eine Stations mit
+ */
 public class Station {
     private double x;
     private double y;
@@ -23,7 +26,7 @@ public class Station {
     }
 
     /**
-     * Gibt die Distanz zum Startpunkt zurück
+     * Gibt die Distanz zum übergebenen Startpunkt (x1, y1) zurück
      * @param x1
      * @param y1
      * @return

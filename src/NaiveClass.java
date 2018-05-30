@@ -42,6 +42,8 @@ public class NaiveClass {
                 counterArray[2]++; //Trainstationcounter
             }
             counter++; //Gesamtcounter
+
+            System.out.println(s.toString());
         }
         System.out.println();
         System.out.println("  > Airports: " + counterArray[1] + "  Trainstations: " + counterArray[2]);
