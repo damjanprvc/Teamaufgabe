@@ -126,7 +126,9 @@ public class Main {
 
                 trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
                 radiusFromAirport = 15; //USEREINGABE
-                grid1.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
+                Grid grid2 = new Grid();
+                grid2.addPointsInGrid(stations);
+                grid2.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
                 System.out.println("-------------------------------------");
                 break;
             default:

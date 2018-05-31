@@ -88,6 +88,9 @@ public class Grid {
     }
 
     public void printStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
+        counterArray[1] = 0;
+        counterArray[2] = 0;
+
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
             int yAdapted = (int)Math.abs(air.getY()/70);
@@ -95,19 +98,21 @@ public class Grid {
 
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
-
-//                    for(Station s : grid[i][j]){
-//                        if(s.getDistance(x,y) <= radius) {
-//                            if(s.getType() == TypeEnum.AIRPORT){
-//                                counterArray[1]++;
-//
-//                            }else if(s.getType() == TypeEnum.TRAINSTATION){
-//                                counterArray[2]++;
-//                            }
-//                        }
-//                    }
+                    for (Station s : grid[i][j]){
+                        if(s.getType() == TypeEnum.TRAINSTATION && air.getDistance(s.getX(), s.getY()) <= radiusFromAirport){
+                            counterArray[2]++; //Trainstation Counter
+                            if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe Ã¼bereinstimmen airportcounter erhÃ¶hen
+                                counterArray[1]++; //Airport counter
+                                break; //wenn mind. anzahl erfüllt ist, brech die schleife ab um unnötige Vergleiche zu vermeiden und den counter unnötigen zu erhöhen
+                            }
+                        }
+                    }
                 }
             }
+            counterArray[2] = 0;
         }
+
+        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " away");
+        System.out.println("  > " + counterArray[1]);
     }
 }
