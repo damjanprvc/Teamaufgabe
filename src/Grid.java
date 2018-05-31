@@ -4,10 +4,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+/**
+ * Die Klasse Grid bildet ein 300x300 Grid, vom typ ArrayList, ab.
+ * Jedes Element im Grid besteht wiederum auch aus einer ArrayList.
+ * Alle Stations werden in das Grid eingefügt und daraufhin weiter bearbeitet bzw. ausgelesen (Effizient)
+ */
 public class Grid {
-    ArrayList<Station>[][] grid;
+    private ArrayList<Station>[][] grid;
     private int[] counterArray = new int[3]; //Index 1: Airportcounter, Index 2: Trainstationcounter
-    ArrayList<Station> airportList = new ArrayList<Station>();
+    private ArrayList<Station> airportList = new ArrayList<Station>();
 
     public Grid() {
         GridInit();
@@ -26,7 +31,7 @@ public class Grid {
 
     /**
      * Fügt alle Stationen aus der übergebenen ArrayList in das Grid
-     * @param stations Liste von Stations, die in das Grid eingefügt werden
+     * @param stations Liste von Stations, die in das Grid eingefügt werden sollen
      */
     public void addPointsInGrid(ArrayList<Station> stations){
         for(Station s : stations){
@@ -36,14 +41,6 @@ public class Grid {
                 airportList.add(s);
             }
         }
-
-        /*int counter = 0;
-        for(int i = 0; i < 300; i++)
-            for(int j = 0; j < 300; j++)
-                for (Station temp : grid[i][j]) {
-                    counter++;
-                }
-        System.out.println("COUUUUNNTNTER GRID: " + counter);*/
     }
 
     /**
@@ -69,9 +66,9 @@ public class Grid {
         int aussen = 1; int innen = 1;
         for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++)
         {
-            System.out.println(aussen + ". Durchlauf der äußeren Schleife");
+            // System.out.println(aussen + ". Durchlauf der äußeren Schleife");
             for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
-                System.out.println("\t" + innen + ". Durchlauf der inneren Schleife");
+                // System.out.println("\t" + innen + ". Durchlauf der inneren Schleife");
                 for(Station s : grid[i][j]){
                     if(s.getDistance(x,y) <= radius) {
                         if(s.getType() == TypeEnum.AIRPORT){
@@ -99,17 +96,16 @@ public class Grid {
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
 
-                    for(Station s : grid[i][j]){
-                        if(s.getDistance(x,y) <= radius) {
-                            if(s.getType() == TypeEnum.AIRPORT){
-                                counterArray[1]++;
-
-                            }else if(s.getType() == TypeEnum.TRAINSTATION){
-                                counterArray[2]++;
-                            }
-                        }
-
-                    }
+//                    for(Station s : grid[i][j]){
+//                        if(s.getDistance(x,y) <= radius) {
+//                            if(s.getType() == TypeEnum.AIRPORT){
+//                                counterArray[1]++;
+//
+//                            }else if(s.getType() == TypeEnum.TRAINSTATION){
+//                                counterArray[2]++;
+//                            }
+//                        }
+//                    }
                 }
             }
         }

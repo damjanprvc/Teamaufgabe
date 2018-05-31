@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Damjan Prvulovic
  * @author Abhishek Singh
+ * @version 1.0
  */
 public class Main {
     // static ArrayList<Station>[][] grid;
@@ -76,9 +77,11 @@ public class Main {
                         System.out.println("-----------------------------------");
 
                         x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
-                        NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
+                        // NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
+                        NaiveClass naiveClass = new NaiveClass();
                         startTime = System.nanoTime();
-                        naiveClass.printOutStations();
+                        naiveClass.addPointsInList(stations);
+                        naiveClass.printStations(x, y, radius);
                         stopTime = System.nanoTime();
                         elapsedTime = stopTime - startTime;
                         elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
@@ -97,9 +100,10 @@ public class Main {
                         trainstationsFromAirport = sc.nextInt();
                         System.out.println("-------------------------------------");
 
-                        NaiveClass naiveClass1 = new NaiveClass(stations, trainstationsFromAirport, radiusFromAirport);
+                        NaiveClass naiveClass1 = new NaiveClass();
                         startTime = System.nanoTime();
-                        naiveClass1.printOutStationsFromAirport();
+                        naiveClass1.addPointsInList(stations);
+                        naiveClass1.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
                         stopTime = System.nanoTime();
                         elapsedTime = stopTime - startTime;
                         elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
@@ -113,7 +117,7 @@ public class Main {
                 break;
             case 2:
                 System.out.println("EFFIZIENTE METHODE");
-                //ToDo: Effiziente Methode aufrufen und switch statement für methodenauswahl implementieren
+                //ToDo: switch statement für methodenauswahl implementieren
                 Grid grid1 = new Grid();
                 grid1.addPointsInGrid(stations);
                 // x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
@@ -129,117 +133,14 @@ public class Main {
                 System.out.println("Invalid selection");
         }
 
-
-        /*
-        double x = 1818.54657;
-        double y = 5813.29982;
-        double radius = 100.0; //in km? anpassen irgendwie?
-        */
-
-
-
-        //stations.sort(Comparator.comparingDouble(Station::getDistance)); //SORT LIST
-        /*
-        for(Station s : stations){
-            System.out.println(s.getDistanceFromZero() + "   " + s.toString());
-        }*/
-
-
-
-
-        // ---------------
-        // 2D-GRID
-        // ---------------
-        // Berechnung der GRID GrÃ¶ÃŸe - Siehe https://algs4.cs.princeton.edu/lectures/99GeometricSearch-2x2.pdf
-
-        // Noch nicht löschen!!!
-        /*
-        double maxx = 0.0;
-        double maxy = 0.0;
-        double minx = 0.0;
-        double miny = 0.0;
-        int c = 0;
-        for(Station s: stations){
-            if(s.getX() > maxx) maxx = s.getX();
-            if(s.getY() > maxy) maxy = s.getY();
-            if(s.getX() < minx) minx = s.getX();
-            if(s.getY() < miny) miny = s.getY();
-            c++;
-        }
-        System.out.println("MAX X: "+ maxx);
-        System.out.println("MAX Y: "+ maxy);
-        System.out.println("MIN X: "+ minx);
-        System.out.println("MIN Y: "+ miny);
-        System.out.println("Anz Stationen: "+ c);
-        */
-
-        // Initialise GRID
-        // Jedes Grid Element EnthÃ¤lt eine Liste (nicht-hierarchischeDatenstruktur) mit den darin enthaltenen Stationen
-        // GridInit();
-
-        // Insert Points in Grid
-        // addPointsInGrid(stations);
-
-        // TODO: Aus dem Radius und dem gegebenen Punkt die zu durchsuchende Fläche berechenen
-        // searchInGrid(x,y,radius);
     }
 
-/*    private static void GridInit(){
-        grid = new ArrayList[300][300];
-        for(int i = 0; i < 300; i++)
-            for(int j = 0; j < 300; j++)
-                grid[i][j] = new ArrayList<Station>();
-    }
-    private static void addPointsInGrid(ArrayList<Station> stations){
-        for(Station s : stations){
-            grid[(int)Math.abs(s.getX())/67][(int)Math.abs(s.getY())/49].add(s);
-        }
-    }
-
-    //Gibt alle Airports und Trainstations aus
-    private static void searchInGrid(double x, double y, double radius){
-        int xAdapted = (int)x/67; //x Coord angepasst fÃ¼r den Grid
-        int yAdapted = (int)y/49; //y Coord angepasst fÃ¼r den Grid
-        int radiusAdapted = (int) radius/67; //ToDo: Radius zum Grid anpassen, sowie x und y
-        int trainstationCounter = 0;
-        int airportCounter = 0;
-
-        int i = xAdapted - radiusAdapted;
-        int j = yAdapted - radiusAdapted;
-        if (xAdapted - radiusAdapted < 0)
-            i = 0;
-        if (yAdapted - radiusAdapted < 0)
-            j = 0;
-
-        for(; i <= xAdapted + radiusAdapted; i++)
-        {
-            for(; j <= yAdapted + radiusAdapted; j++)
-            {
-                for(Station s : grid[i][j]){
-                    if(s.getDistance(x,y) <= radius) {
-                        if(s.getType().equals("AIRPORT")){
-                            airportCounter++;
-                        }else if(s.getType().equals("TRAINSTATION")){
-                            trainstationCounter++;
-                        }
-                    }
-
-                }
-            }
-        }
-
-        System.out.println("Im Radius " + radius + " liegen " + airportCounter + " FlughÃ¤fen und " + trainstationCounter + " BahnhÃ¶fe");
-    }*/
-
-    //Gibt die Anzahl der FlughÃ¤fen aus die mind. x Trainstation im radius y haben
-    private static void searchInGrid(int x, int y, int trainstationsFromAirport, int radiusFromAirport){
-        // TODO
-    }
-
+    /**
+     * Liest und returnt alle Stations aus dem File "/data/junctions.csv"
+     * @return ArrayList<Station> - Liste mit allen Stations
+     */
     private static ArrayList<Station> getStationsFromFile(){
-
         ArrayList<Station> stations = new ArrayList<>();
-
 
         try (Scanner s = new Scanner(
                 new File(System.getProperty("user.dir") +

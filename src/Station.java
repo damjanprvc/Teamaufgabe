@@ -1,5 +1,5 @@
 /**
- * Die Klasse Station bildet eine Stations mit
+ * Die Klasse Station bildet eine Station mit den nötigen Properties: (x, y), type und distanceToStart ab.
  */
 public class Station {
     private double x;
@@ -29,7 +29,7 @@ public class Station {
      * Gibt die Distanz zum übergebenen Startpunkt (x1, y1) zurück
      * @param x1
      * @param y1
-     * @return
+     * @return Distanz zum übergebenen Startpunkt (double)
      */
     public double getDistance(double x1, double y1){
         //Formel = Pythagoras mit (P1.X - P2.X)^2 fpr Y auch
@@ -42,8 +42,8 @@ public class Station {
 
     @Override
     public String toString() {
-        return "Station{"+"Distance zum Start: "+distanceToStart+
-                "              x=" + x +
+        return "Station{"+"Distance zum Start: " + distanceToStart +
+                " x=" + x +
                 ", y=" + y +
                 ", type='" + type + '\'' +
                 '}';
