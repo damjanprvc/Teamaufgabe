@@ -51,8 +51,8 @@ public class Grid {
      * @param radius
      */
     public void printStations(double x, double y, double radius){
-        int xAdapted = (int)Math.abs(x/70); //x Coord angepasst fÃ¼r den Grid
-        int yAdapted = (int)Math.abs(y/70); //y Coord angepasst fÃ¼r den Grid
+        int xAdapted = (int)Math.abs(x/70); //x Coord angepasst für den Grid
+        int yAdapted = (int)Math.abs(y/70); //y Coord angepasst für den Grid
         int radiusAdapted = (int) (radius/70) + 1;
 
         // int i = Math.abs(xAdapted - radiusAdapted);
@@ -63,7 +63,8 @@ public class Grid {
         if (yAdapted - radiusAdapted < 0)
             j = 0;
             */
-        int aussen = 1; int innen = 1;
+        int aussen = 1;
+        int innen = 1;
         for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++)
         {
             // System.out.println(aussen + ". Durchlauf der äußeren Schleife");
@@ -94,25 +95,29 @@ public class Grid {
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
             int yAdapted = (int)Math.abs(air.getY()/70);
-            int radiusAdapted = (int) (radiusFromAirport/70) + 1;
+            int radiusAdapted = (int) radiusFromAirport/70 + 1;
 
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
                     for (Station s : grid[i][j]){
                         if(s.getType() == TypeEnum.TRAINSTATION && air.getDistance(s.getX(), s.getY()) <= radiusFromAirport){
                             counterArray[2]++; //Trainstation Counter
-                            if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe Ã¼bereinstimmen airportcounter erhÃ¶hen
+                            if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhÃ¶hen
                                 counterArray[1]++; //Airport counter
+                                System.out.println(counterArray[2]);
                                 break; //wenn mind. anzahl erfüllt ist, brech die schleife ab um unnötige Vergleiche zu vermeiden und den counter unnötigen zu erhöhen
                             }
                         }
                     }
+
                 }
+
             }
+
             counterArray[2] = 0;
         }
 
-        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " away");
+        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
         System.out.println("  > " + counterArray[1]);
     }
 }

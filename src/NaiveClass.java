@@ -39,6 +39,7 @@ public class NaiveClass {
     }
 
     public void printStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
+        System.out.println("Calculating........");
         counterArray = new int[3];
 
         for(Station s : stations){ //Durch Stationsliste durchlaufen
