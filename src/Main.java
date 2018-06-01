@@ -124,6 +124,8 @@ public class Main {
                 x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                 grid1.printStations(x, y, radius);
 
+                System.out.println("2. TEILAUFGABE");
+                System.out.println("-------------------------------------");
                 trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
                 radiusFromAirport = 15; //USEREINGABE
                 Grid grid2 = new Grid();

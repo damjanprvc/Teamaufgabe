@@ -95,7 +95,7 @@ public class Grid {
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
             int yAdapted = (int)Math.abs(air.getY()/70);
-            int radiusAdapted = (int) radiusFromAirport/70 + 1;
+            int radiusAdapted = (int) (radiusFromAirport/70) + 1;
 
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
@@ -104,7 +104,7 @@ public class Grid {
                             counterArray[2]++; //Trainstation Counter
                             if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhÃ¶hen
                                 counterArray[1]++; //Airport counter
-                                System.out.println(counterArray[2]);
+                                // System.out.println(counterArray[2]);
                                 break; //wenn mind. anzahl erfüllt ist, brech die schleife ab um unnötige Vergleiche zu vermeiden und den counter unnötigen zu erhöhen
                             }
                         }
