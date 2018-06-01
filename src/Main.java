@@ -40,7 +40,8 @@ public class Main {
         System.out.println("-------------------------------------------------------");
         System.out.print("> ");
 
-        userInput = sc.nextInt(); //Userinput
+        //userInput = sc.nextInt(); //Userinput
+        userInput = 2;
 
         //Menü
         switch (userInput){

@@ -92,6 +92,7 @@ public class Grid {
         counterArray[1] = 0;
         counterArray[2] = 0;
 
+
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
             int yAdapted = (int)Math.abs(air.getY()/70);
@@ -100,6 +101,7 @@ public class Grid {
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
                     for (Station s : grid[i][j]){
+
                         if(s.getType() == TypeEnum.TRAINSTATION && air.getDistance(s.getX(), s.getY()) <= radiusFromAirport){
                             counterArray[2]++; //Trainstation Counter
                             if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhÃ¶hen
@@ -113,7 +115,6 @@ public class Grid {
                 }
 
             }
-
             counterArray[2] = 0;
         }
 
