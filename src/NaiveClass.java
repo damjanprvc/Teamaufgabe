@@ -42,6 +42,9 @@ public class NaiveClass {
         System.out.println("Calculating........");
         counterArray = new int[3];
 
+        trainstationsFromAirport = 15; //Testdaten, ToDo: rauslöschen wenns nicht mehr benötigt
+        radiusFromAirport = 5;
+
         for(Station s : stations){ //Durch Stationsliste durchlaufen
             if(s.getType() == TypeEnum.AIRPORT){ //Nach Airports checken
                 for(Station s1 : getStationsFromCoord(s.getX(),s.getY(),radiusFromAirport)){ //Für jeden Airport alle Stationen im Radius abspeichern und durch iterieren

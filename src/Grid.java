@@ -39,6 +39,7 @@ public class Grid {
 
             if (s.getType() == TypeEnum.AIRPORT){
                 airportList.add(s);
+
             }
         }
     }
@@ -55,14 +56,6 @@ public class Grid {
         int yAdapted = (int)Math.abs(y/70); //y Coord angepasst für den Grid
         int radiusAdapted = (int) (radius/70) + 1;
 
-        // int i = Math.abs(xAdapted - radiusAdapted);
-        // int j = Math.abs(yAdapted - radiusAdapted);
-        /*
-        if (xAdapted - radiusAdapted < 0)
-            i = 0;
-        if (yAdapted - radiusAdapted < 0)
-            j = 0;
-            */
         int aussen = 1;
         int innen = 1;
         for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++)
@@ -92,6 +85,8 @@ public class Grid {
         counterArray[1] = 0;
         counterArray[2] = 0;
 
+        trainstationsFromAirport = 15; //testdaten ToDo: Rauslöschen wenn nicht benötigt
+        radiusFromAirport = 5;
 
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
@@ -101,14 +96,13 @@ public class Grid {
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
                     for (Station s : grid[i][j]){
-
                         if(s.getType() == TypeEnum.TRAINSTATION && air.getDistance(s.getX(), s.getY()) <= radiusFromAirport){
                             counterArray[2]++; //Trainstation Counter
                             if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhÃ¶hen
                                 counterArray[1]++; //Airport counter
-                                // System.out.println(counterArray[2]);
                                 break; //wenn mind. anzahl erfüllt ist, brech die schleife ab um unnötige Vergleiche zu vermeiden und den counter unnötigen zu erhöhen
                             }
+
                         }
                     }
 

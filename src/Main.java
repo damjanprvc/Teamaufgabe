@@ -40,8 +40,8 @@ public class Main {
         System.out.println("-------------------------------------------------------");
         System.out.print("> ");
 
-        //userInput = sc.nextInt(); //Userinput
-        userInput = 2;
+        //userInput = sc.nextInt(); //Userinput //ToDo: wieder entkommentiern wenn fertig
+        userInput = 2; //Naiv: 20/20 = 481 Grid: 20/20 = 681; Naiv: 15/5 = 32, Grid: 15/5 = 34 --- Testdatenergebnisse
 
         //Menü
         switch (userInput){
