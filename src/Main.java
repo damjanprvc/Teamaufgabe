@@ -19,19 +19,18 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  */
 public class Main {
-    // static ArrayList<Station>[][] grid;
     public static void main(String[] args) {
         System.out.println("--- EP2 Teamarbeit V1.0 ---");
 
-        //Programinitsialisierung
+        // Programinitsialisierung
         ArrayList<Station> stations = getStationsFromFile(); //Daten vom File einlesen
         Scanner sc = new Scanner(System.in); // Scanner für den Userinput
         int userInput;
         double x = 0, y = 0, radius = 0;
-        int trainstationsFromAirport;  //USER EINGABE
+        int trainstationsFromAirport;  //USEREINGABE
         double radiusFromAirport; //USEREINGABE
         long startTime, stopTime, elapsedTime;
-        //-----------------------------------------
+
 
         System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
         System.out.println("1: Naive Methode");
@@ -125,8 +124,8 @@ public class Main {
                 x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                 grid1.printStations(x, y, radius);
 
-                System.out.println("2. TEILAUFGABE");
                 System.out.println("-------------------------------------");
+                System.out.println("2. TEILAUFGABE");
                 trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
                 radiusFromAirport = 15; //USEREINGABE
                 Grid grid2 = new Grid();
@@ -137,7 +136,6 @@ public class Main {
             default:
                 System.out.println("Invalid selection");
         }
-
     }
 
     /**

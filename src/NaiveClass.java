@@ -1,14 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * Die Klasse NaiveClass bildet die Naive Datenstruktur (eine ArrayList) ab.
+ * Jedes Element ist eine Station
+ */
 public class NaiveClass {
     private ArrayList<Station> stations;
     private int[] counterArray;//Index 1: Airportcounter, Index 2: Trainstationcounter
     private int trainstationsFromAirport;
     private double radiusFromAirport;
 
-    public NaiveClass() {
-    }
 
+    /**
+     * Fügt die aus der Main eingelesenen Stations, in die Objektliste stations.
+     * @param stations
+     */
     public void addPointsInList(ArrayList<Station> stations){
         this.stations = stations;
     }
@@ -38,6 +44,13 @@ public class NaiveClass {
         System.out.println("-------------------------------------------------------");
     }
 
+    /**
+     *  Berechnet und gibt, die Anzahl aller Flughäfen,
+     *  in deren r-Längeneinheiten-Umkreis (radiusFromAirport)
+     *  sich mindestens n Bahnhöfe (trainstationsFromAirport) beﬁnden, aus.
+     * @param trainstationsFromAirport
+     * @param radiusFromAirport
+     */
     public void printStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
         System.out.println("Calculating........");
         counterArray = new int[3];
@@ -64,7 +77,13 @@ public class NaiveClass {
         System.out.println("  > " + counterArray[1]);
     }
 
-
+    /**
+     * Returnt alle Stations, die sich innerhalb der übergebenen Radius befinden
+     * @param x
+     * @param y
+     * @param radius
+     * @return
+     */
     private ArrayList<Station> getStationsFromCoord(double x, double y, double radius){
         ArrayList tempList = new ArrayList();
 

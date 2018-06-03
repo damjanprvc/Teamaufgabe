@@ -14,6 +14,9 @@ public class Grid {
     private int[] counterArray = new int[3]; //Index 1: Airportcounter, Index 2: Trainstationcounter
     private ArrayList<Station> airportList = new ArrayList<Station>();
 
+    /**
+     * Constructor. Wird ein new() Objekt erzeugt, wird auch GridInit() ausgeführt.
+     */
     public Grid() {
         GridInit();
     }
@@ -81,6 +84,13 @@ public class Grid {
         System.out.println("  > Airports: " + counterArray[1] + "  Trainstations: " + counterArray[2]);
     }
 
+    /**
+     *  Berechnet und gibt, die Anzahl aller Flughäfen,
+     *  in deren r-Längeneinheiten-Umkreis (radiusFromAirport)
+     *  sich mindestens n Bahnhöfe (trainstationsFromAirport) beﬁnden, aus.
+     * @param trainstationsFromAirport
+     * @param radiusFromAirport
+     */
     public void printStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
         counterArray[1] = 0;
         counterArray[2] = 0;
