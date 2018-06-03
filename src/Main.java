@@ -39,8 +39,8 @@ public class Main {
         System.out.println("-------------------------------------------------------");
         System.out.print("> ");
 
-        //userInput = sc.nextInt(); //Userinput //ToDo: wieder entkommentiern wenn fertig
-        userInput = 2; //Naiv: 20/20 = 481 Grid: 20/20 = 681; Naiv: 15/5 = 32, Grid: 15/5 = 34 --- Testdatenergebnisse
+        userInput = sc.nextInt(); //Userinput //ToDo: wieder entkommentiern wenn fertig
+        //userInput = 2; //Naiv: 20/20 = 481 Grid: 20/20 = 681; Naiv: 15/5 = 32, Grid: 15/5 = 34 --- Testdatenergebnisse
 
         //Menü
         switch (userInput){
@@ -65,7 +65,6 @@ public class Main {
                         System.out.println("Gebe alle Stationen vom Punkt(x,y) aus");
                         System.out.println("------------------------------------------");
 
-                        //ToDo: evtl sicherstellen das richtige Eingabe eingegeben wurde
                         //User gibt die x und y und radius ein
                         System.out.println("Geben Sie die jeweiligen Koordinaten ein");
                         /*System.out.print("x = ");
@@ -77,7 +76,6 @@ public class Main {
                         System.out.println("-----------------------------------");
 
                         x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
-                        // NaiveClass naiveClass = new NaiveClass(stations,x,y,radius);
                         NaiveClass naiveClass = new NaiveClass();
                         startTime = System.nanoTime();
                         naiveClass.addPointsInList(stations);
@@ -118,20 +116,38 @@ public class Main {
             case 2:
                 System.out.println("EFFIZIENTE METHODE");
                 //ToDo: switch statement für methodenauswahl implementieren
-                Grid grid1 = new Grid();
+                /*Grid grid1 = new Grid();
+
+                startTime = System.nanoTime();
                 grid1.addPointsInGrid(stations);
                 // x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
                 x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                 grid1.printStations(x, y, radius);
+
+                stopTime = System.nanoTime();
+                elapsedTime = stopTime - startTime;
+                elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
 
                 System.out.println("-------------------------------------");
                 System.out.println("2. TEILAUFGABE");
                 trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
                 radiusFromAirport = 15; //USEREINGABE
                 Grid grid2 = new Grid();
+                startTime = System.nanoTime();
                 grid2.addPointsInGrid(stations);
                 grid2.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
-                System.out.println("-------------------------------------");
+
+                stopTime = System.nanoTime();
+                elapsedTime = stopTime - startTime;
+                elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
+
+                System.out.println("-------------------------------------");*/
+
+                Grid g = new Grid();
+                g.addPointsInGrid(stations);
+                System.out.println(">>>>>" + g.getStationsFromAirport(20, 15.0));
                 break;
             default:
                 System.out.println("Invalid selection");

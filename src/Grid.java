@@ -95,8 +95,8 @@ public class Grid {
         counterArray[1] = 0;
         counterArray[2] = 0;
 
-        trainstationsFromAirport = 15; //testdaten ToDo: Rauslöschen wenn nicht benötigt
-        radiusFromAirport = 5;
+        trainstationsFromAirport = 20; //testdaten ToDo: Rauslöschen wenn nicht benötigt
+        radiusFromAirport = 15;
 
         for(Station air : airportList){
             int xAdapted = (int)Math.abs(air.getX()/70);
@@ -106,7 +106,7 @@ public class Grid {
             for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++) {
                 for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
                     for (Station s : grid[i][j]){
-                        if(s.getType() == TypeEnum.TRAINSTATION && air.getDistance(s.getX(), s.getY()) <= radiusFromAirport){
+                        if(s.getType() == TypeEnum.TRAINSTATION && (air.getDistance(s.getX(), s.getY()) <= radiusFromAirport)){
                             counterArray[2]++; //Trainstation Counter
                             if(counterArray[2] >= trainstationsFromAirport){ //Wenn trainstatiocounter mit der Usereingabe übereinstimmen airportcounter erhÃ¶hen
                                 counterArray[1]++; //Airport counter
@@ -124,5 +124,55 @@ public class Grid {
 
         System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
         System.out.println("  > " + counterArray[1]);
+    }
+
+
+    // TEST
+    public int[] getStations(double x, double y, double radius){
+        int[] counter = new int[3];
+        int xAdapted = (int)Math.abs(x/70); //x Coord angepasst für den Grid
+        int yAdapted = (int)Math.abs(y/70); //y Coord angepasst für den Grid
+        int radiusAdapted = (int) (radius/70) + 1;
+
+        int aussen = 1;
+        int innen = 1;
+        for(int i = Math.abs(xAdapted - radiusAdapted); i <= xAdapted + radiusAdapted; i++)
+        {
+            // System.out.println(aussen + ". Durchlauf der äußeren Schleife");
+            for(int j = Math.abs(yAdapted - radiusAdapted); j <= yAdapted + radiusAdapted; j++) {
+                // System.out.println("\t" + innen + ". Durchlauf der inneren Schleife");
+                for(Station s : grid[i][j]){
+                    if(s.getDistance(x,y) <= radius) {
+                        if(s.getType() == TypeEnum.AIRPORT){
+                            counter[1]++;
+
+                        }else if(s.getType() == TypeEnum.TRAINSTATION){
+                            counter[2]++;
+                        }
+                    }
+
+                }
+            }
+            innen = 1;
+        }
+        return counter;
+    }
+
+    public int getStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
+        counterArray[1] = 0;
+        counterArray[2] = 0;
+        int[] counter;
+        int airports = 0;
+
+        trainstationsFromAirport = 20; //testdaten ToDo: Rauslöschen wenn nicht benötigt
+        radiusFromAirport = 15;
+
+        for(Station air : airportList){
+            counter = getStations(air.getX(), air.getY(), radiusFromAirport);
+            if(counter[2] >= trainstationsFromAirport) {
+                airports++;
+            }
+        }
+        return airports;
     }
 }

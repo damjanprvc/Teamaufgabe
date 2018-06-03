@@ -41,7 +41,6 @@ public class NaiveClass {
         System.out.println();
         System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
         System.out.println("  > Airports: " + counterArray[1] + "  Trainstations: " + counterArray[2]);
-        System.out.println("-------------------------------------------------------");
     }
 
     /**
@@ -55,8 +54,8 @@ public class NaiveClass {
         System.out.println("Calculating........");
         counterArray = new int[3];
 
-        trainstationsFromAirport = 15; //Testdaten, ToDo: rauslöschen wenns nicht mehr benötigt
-        radiusFromAirport = 5;
+        trainstationsFromAirport = 20; //testdaten ToDo: Rauslöschen wenn nicht benötigt
+        radiusFromAirport = 15;
 
         for(Station s : stations){ //Durch Stationsliste durchlaufen
             if(s.getType() == TypeEnum.AIRPORT){ //Nach Airports checken
