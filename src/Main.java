@@ -75,6 +75,7 @@ public class Main {
                         NaiveClass naiveClass = new NaiveClass();
                         startTime = System.nanoTime();
                         naiveClass.addPointsInList(stations);
+                        System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
                         System.out.println("  > Airports: " + naiveClass.getStations(x,y,radius)[1] + "  Trainstations: " + naiveClass.getStations(x,y,radius)[2]);
 
                         stopTime = System.nanoTime();
@@ -88,7 +89,7 @@ public class Main {
                     case 2: //TEILAUFGABE 2
                         System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
                         System.out.println("-----------------------------------------------");
-                        System.out.println("Geben Sie die mind. Anzahl der Banhöfe ein");
+                        System.out.println("Geben Sie die mind. Anzahl der Bahnhöfe ein");
                         System.out.print("trainstationsFromAirport = ");
                         trainstationsFromAirport = sc.nextInt();
                         System.out.println("Geben Sie den jeweiligen Radius vom Flughafen ein");
@@ -101,6 +102,7 @@ public class Main {
                         startTime = System.nanoTime();
 
                         naiveClass1.addPointsInList(stations);
+                        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
                         System.out.println("  > " + naiveClass1.getStationsFromAirport(trainstationsFromAirport, radiusFromAirport));
 
                         stopTime = System.nanoTime();
@@ -116,11 +118,10 @@ public class Main {
                 System.out.println("-----------------------------------");
                 break;
             case 2: //GRID
-                System.out.println("Effiziente METHODE");
+                System.out.println("EFFIZIENTE METHODE");
                 System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
                 System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
                 System.out.println("2: Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
-
                 System.out.print("> ");
                 userInput = sc.nextInt();
                 switch (userInput){
@@ -157,7 +158,6 @@ public class Main {
 
                         System.out.println("-------------------------------------");
 
-
                         break;
                     case 2: //TEILAUFGABE 2
                         System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
@@ -189,7 +189,6 @@ public class Main {
                 }
                 System.out.println("-----------------------------------");
                 break;
-
             default:
                 System.out.println("Invalid selection");
         }

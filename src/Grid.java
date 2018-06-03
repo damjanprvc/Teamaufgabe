@@ -7,7 +7,6 @@ import java.util.ArrayList;
  */
 public class Grid {
     private ArrayList<Station>[][] grid;
-    private int[] counterArray = new int[3]; //Index 1: Airportcounter, Index 2: Trainstationcounter
     private ArrayList<Station> airportList = new ArrayList<Station>();
 
     /**
@@ -89,14 +88,8 @@ public class Grid {
      * @return airports-Counter vom Typ int
      */
     public int getStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
-        counterArray[1] = 0;
-        counterArray[2] = 0;
-
         int[] counter;
         int airports = 0;
-
-        trainstationsFromAirport = 20; //testdaten ToDo: Rauslöschen wenn nicht benötigt
-        radiusFromAirport = 15;
 
         for(Station air : airportList){
             counter = getStations(air.getX(), air.getY(), radiusFromAirport);

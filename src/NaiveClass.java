@@ -81,7 +81,7 @@ public class NaiveClass {
 
 
     /**
-     * Returnt alle Stations, die sich innerhalb der übergebenen Radius befinden
+     * Returnt alle Stations, die sich innerhalb des übergebenen Radius befinden
      * @param x
      * @param y
      * @param radius

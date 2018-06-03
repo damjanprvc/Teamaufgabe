@@ -5,6 +5,5 @@
 public enum TypeEnum {
     AIRPORT,
     TRAINSTATION;
-
 }
 
