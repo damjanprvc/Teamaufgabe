@@ -1,8 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 /**
  * Die Klasse Grid bildet ein 300x300 Grid, vom typ ArrayList, ab.
@@ -95,6 +91,7 @@ public class Grid {
     public int getStationsFromAirport(int trainstationsFromAirport, double radiusFromAirport){
         counterArray[1] = 0;
         counterArray[2] = 0;
+
         int[] counter;
         int airports = 0;
 

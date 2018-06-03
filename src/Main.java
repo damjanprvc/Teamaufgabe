@@ -39,16 +39,14 @@ public class Main {
         System.out.println("-------------------------------------------------------");
         System.out.print("> ");
 
-        userInput = sc.nextInt(); //Userinput //ToDo: wieder entkommentiern wenn fertig
-        //userInput = 2; //Naiv: 20/20 = 481 Grid: 20/20 = 681; Naiv: 15/5 = 32, Grid: 15/5 = 34 --- Testdatenergebnisse
-
+        userInput = sc.nextInt(); //Userinput
         //Menü
         switch (userInput){
             case 0:
                 System.out.println("QUITTING PROGRAM");
                 System.out.println("------------------------------------");
                 break;
-            case 1:
+            case 1: //Naive
                 System.out.println("NAIVE METHODE");
                 System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
                 System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
@@ -60,33 +58,34 @@ public class Main {
                         System.out.println("QUITTING PROGRAM");
                         System.out.println("------------------------------------");
                         break;
-                    case 1:
+                    case 1: //TEILAUFGABE 1
                         System.out.println("Gebe alle Stationen vom Punkt(x,y) aus");
                         System.out.println("------------------------------------------");
 
                         //User gibt die x und y und radius ein
                         System.out.println("Geben Sie die jeweiligen Koordinaten ein");
-                        /*System.out.print("x = ");
+                        System.out.print("x = ");
                         x = sc.nextDouble();
                         System.out.print("y = ");
                         y = sc.nextDouble();
                         System.out.print("radius = ");
-                        radius = sc.nextDouble();*/
+                        radius = sc.nextDouble();
                         System.out.println("-----------------------------------");
 
-                        x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
                         NaiveClass naiveClass = new NaiveClass();
                         startTime = System.nanoTime();
                         naiveClass.addPointsInList(stations);
-                        naiveClass.printStations(x, y, radius);
-                        stopTime = System.nanoTime();
-                        elapsedTime = stopTime - startTime;
-                        elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                        System.out.println("  > Airports: " + naiveClass.getStations(x,y,radius)[1] + "  Trainstations: " + naiveClass.getStations(x,y,radius)[2]);
 
-                        System.out.println("LAUFZEIT: " + elapsedTime + " ns");
+                        stopTime = System.nanoTime();
+
+                        elapsedTime = stopTime - startTime;
+                        elapsedTime = TimeUnit.MILLISECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+
+                        System.out.println("LAUFZEIT: " + elapsedTime + " ms");
 
                         break;
-                    case 2:
+                    case 2: //TEILAUFGABE 2
                         System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
                         System.out.println("-----------------------------------------------");
                         System.out.println("Geben Sie die mind. Anzahl der Banhöfe ein");
@@ -98,10 +97,14 @@ public class Main {
                         System.out.println("-------------------------------------");
 
                         NaiveClass naiveClass1 = new NaiveClass();
+
                         startTime = System.nanoTime();
+
                         naiveClass1.addPointsInList(stations);
-                        naiveClass1.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
+                        System.out.println("  > " + naiveClass1.getStationsFromAirport(trainstationsFromAirport, radiusFromAirport));
+
                         stopTime = System.nanoTime();
+
                         elapsedTime = stopTime - startTime;
                         elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
                         System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
@@ -112,40 +115,81 @@ public class Main {
                 }
                 System.out.println("-----------------------------------");
                 break;
-            case 2:
-                System.out.println("EFFIZIENTE METHODE");
-                //ToDo: switch statement für methodenauswahl implementieren
+            case 2: //GRID
+                System.out.println("Effiziente METHODE");
+                System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
+                System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
+                System.out.println("2: Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
 
-                x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
-                startTime = System.nanoTime();
+                System.out.print("> ");
+                userInput = sc.nextInt();
+                switch (userInput){
+                    case 0:
+                        System.out.println("QUITTING PROGRAM");
+                        System.out.println("------------------------------------");
+                        break;
+                    case 1: //TEILAUFGABE 1
+                        System.out.println("Gebe alle Stationen vom Punkt(x,y) aus");
+                        System.out.println("------------------------------------------");
 
-                Grid grid1 = new Grid();
-                grid1.addPointsInGrid(stations);
-                System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
-                System.out.println("  > Airports: " + grid1.getStations(x,y,radius)[1] + "  Trainstations: " + grid1.getStations(x,y,radius)[2]);
+                        //User gibt die x und y und radius ein
+                        System.out.println("Geben Sie die jeweiligen Koordinaten ein");
+                        System.out.print("x = ");
+                        x = sc.nextDouble();
+                        System.out.print("y = ");
+                        y = sc.nextDouble();
+                        System.out.print("radius = ");
+                        radius = sc.nextDouble();
+                        System.out.println("-----------------------------------");
 
-                stopTime = System.nanoTime();
-                elapsedTime = stopTime - startTime;
-                elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
-                System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
+                        startTime = System.nanoTime();
 
-                System.out.println("-------------------------------------");
-                System.out.println("2. TEILAUFGABE");
+                        Grid grid1 = new Grid();
+                        grid1.addPointsInGrid(stations);
+                        System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
+                        System.out.println("  > Airports: " + grid1.getStations(x,y,radius)[1] + "  Trainstations: " + grid1.getStations(x,y,radius)[2]);
 
-                trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
-                radiusFromAirport = 15; //USEREINGABE
-                startTime = System.nanoTime();
+                        stopTime = System.nanoTime();
 
-                Grid grid2 = new Grid();
-                grid2.addPointsInGrid(stations);
-                System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
-                System.out.println("  > " + grid2.getStationsFromAirport(trainstationsFromAirport, radiusFromAirport));
+                        elapsedTime = stopTime - startTime;
+                        elapsedTime = TimeUnit.MILLISECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                        System.out.println("LAUFZEIT: " + elapsedTime + " ms");
 
-                stopTime = System.nanoTime();
-                elapsedTime = stopTime - startTime;
-                elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
-                System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
+                        System.out.println("-------------------------------------");
+
+
+                        break;
+                    case 2: //TEILAUFGABE 2
+                        System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
+                        System.out.println("-----------------------------------------------");
+                        System.out.println("Geben Sie die mind. Anzahl der Banhöfe ein");
+                        System.out.print("trainstationsFromAirport = ");
+                        trainstationsFromAirport = sc.nextInt();
+                        System.out.println("Geben Sie den jeweiligen Radius vom Flughafen ein");
+                        System.out.print("radiusFromAirport = ");
+                        radiusFromAirport = sc.nextDouble();
+                        System.out.println("-------------------------------------");
+
+                        startTime = System.nanoTime();
+
+                        Grid grid2 = new Grid();
+                        grid2.addPointsInGrid(stations);
+                        System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
+                        System.out.println("  > " + grid2.getStationsFromAirport(trainstationsFromAirport, radiusFromAirport));
+
+                        stopTime = System.nanoTime();
+
+                        elapsedTime = stopTime - startTime;
+                        elapsedTime = TimeUnit.MILLISECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
+                        System.out.println("LAUFZEIT: " + elapsedTime + " ms");
+
+                        break;
+                    default:
+                        System.out.println("Invalid selection");
+                }
+                System.out.println("-----------------------------------");
                 break;
+
             default:
                 System.out.println("Invalid selection");
         }
