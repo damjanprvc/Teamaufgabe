@@ -50,7 +50,6 @@ public class Main {
                 break;
             case 1:
                 System.out.println("NAIVE METHODE");
-                System.out.println("------------------------------------------------------");
                 System.out.println("Pressen Sie die jeweilige Nummer und drücken Sie Enter");
                 System.out.println("1: Gebe alle Stationen vom Punkt(x,y) aus");
                 System.out.println("2: Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
@@ -90,12 +89,12 @@ public class Main {
                     case 2:
                         System.out.println("Gebe alle Flughäfen aus die im Radius r mind. x Bahnhöfe haben");
                         System.out.println("-----------------------------------------------");
-                        System.out.println("Geben Sie den jeweiligen Radius vom Flughafen ein");
-                        System.out.print("radiusFromAirport = ");
-                        radiusFromAirport = sc.nextDouble();
                         System.out.println("Geben Sie die mind. Anzahl der Banhöfe ein");
                         System.out.print("trainstationsFromAirport = ");
                         trainstationsFromAirport = sc.nextInt();
+                        System.out.println("Geben Sie den jeweiligen Radius vom Flughafen ein");
+                        System.out.print("radiusFromAirport = ");
+                        radiusFromAirport = sc.nextDouble();
                         System.out.println("-------------------------------------");
 
                         NaiveClass naiveClass1 = new NaiveClass();
@@ -116,13 +115,14 @@ public class Main {
             case 2:
                 System.out.println("EFFIZIENTE METHODE");
                 //ToDo: switch statement für methodenauswahl implementieren
-                /*Grid grid1 = new Grid();
 
+                x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
                 startTime = System.nanoTime();
+
+                Grid grid1 = new Grid();
                 grid1.addPointsInGrid(stations);
-                // x = 1818.54657; y = 5813.29982; radius = 100.0; // TODO: Hier -> Usereingabe
-                x = -5331.027671723368; y = -1770.9729750797578; radius = 1000.0;
-                grid1.printStations(x, y, radius);
+                System.out.println("Junctions less than " + radius + " unit from x = " + x + " y = " + y);
+                System.out.println("  > Airports: " + grid1.getStations(x,y,radius)[1] + "  Trainstations: " + grid1.getStations(x,y,radius)[2]);
 
                 stopTime = System.nanoTime();
                 elapsedTime = stopTime - startTime;
@@ -131,23 +131,20 @@ public class Main {
 
                 System.out.println("-------------------------------------");
                 System.out.println("2. TEILAUFGABE");
+
                 trainstationsFromAirport = 20;  //USER EINGABE //TODO: User eingabe
                 radiusFromAirport = 15; //USEREINGABE
-                Grid grid2 = new Grid();
                 startTime = System.nanoTime();
+
+                Grid grid2 = new Grid();
                 grid2.addPointsInGrid(stations);
-                grid2.printStationsFromAirport(trainstationsFromAirport, radiusFromAirport);
+                System.out.println("Airports with at least " + trainstationsFromAirport + " Trainstations less than " + radiusFromAirport + " units away");
+                System.out.println("  > " + grid2.getStationsFromAirport(trainstationsFromAirport, radiusFromAirport));
 
                 stopTime = System.nanoTime();
                 elapsedTime = stopTime - startTime;
                 elapsedTime = TimeUnit.SECONDS.convert(elapsedTime,TimeUnit.NANOSECONDS);
                 System.out.println("LAUFZEIT: " + elapsedTime + " Sekunden");
-
-                System.out.println("-------------------------------------");*/
-
-                Grid g = new Grid();
-                g.addPointsInGrid(stations);
-                System.out.println(">>>>>" + g.getStationsFromAirport(20, 15.0));
                 break;
             default:
                 System.out.println("Invalid selection");
